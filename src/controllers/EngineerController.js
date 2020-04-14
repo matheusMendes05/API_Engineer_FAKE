@@ -16,7 +16,7 @@ module.exports = {
                 return res.status(400).send({ error: "Engineer already exists." });
 
             const engineers = await engineer.create(req.body);
-            return res.status(200).send({ engineers });
+            return res.status(201).send({ engineers });
 
         } catch{
             return res.status(400).send({ error: "Could not register engineer" });
@@ -37,7 +37,24 @@ module.exports = {
         } catch{
             return res.status(400).send({ error: "The deletion failed." });
         }
+    },
+    async update(req, res) {
+        try {
+            const { id } = req.params;
+            const engineers = req.body;
+            const search = await engineer.findById({ _id: id });
 
+            if (!search) {
+                return res.status(400).send({ message: "Record not Exist in Data Base" });
+            } else {
+                await engineer.findByIdAndUpdate(search, engineers, {
+                    new: true
+                });
+                return res.status(201).send({ message: "Record successfully updated" });
+            }
+
+        } catch{
+            return res.status(400).send({ error: " Update failed." });
+        }
     }
-
 }
