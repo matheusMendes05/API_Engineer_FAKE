@@ -5,7 +5,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 
-app.use(require('./routes'));
+app.use(require('./router'));
 
 
 
