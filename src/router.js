@@ -11,7 +11,7 @@ router.delete('/api/delete/user/:id', EngineerController.delete);
 router.put('/api/update/user/:id', EngineerController.update);
 
 // ProfileController
-router.get('/api/user/:id', ProfileController.index);
+router.get('/api/user', ProfileController.index);
 
 module.exports = router;
 
