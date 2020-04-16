@@ -27,7 +27,6 @@ const EngineerSchema = new mongoose.Schema({
     national_registry: {
         type: String,
         unique: true,
-
     },
     email: {
         type: String,
