@@ -4,16 +4,19 @@ module.exports = {
     // List Unique Engineer
     async index(req, res) {
         const { card_n } = req.body;
+        const engineer = await eng.findOne({ card_n });
+
         try {
-            if (await card_n)
-                const engineer = await eng.findOne({ card_n });
+            if (card_n === '') {
+                return res.status(400).send({ error: "Empty field" });
+            }
             if (!engineer) {
-                res.status(400).send({ error: "Engineer does not exist in the database" });
+                return res.status(400).send({ error: "Engineer does not exist in the database" });
             } else {
-                res.status(200).json({ engineer });
+                return res.status(200).json({ engineer });
             }
         } catch{
-            res.status(400).send({ error: "The search failed" });
+            return res.status(400).send({ error: "The search failed" });
         }
     },
 }
